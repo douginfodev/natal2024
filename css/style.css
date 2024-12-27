@@ -1,0 +1,239 @@
+* {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --border-color: #7bbcfc;
+
+  --image-bck-fundo: url('../images/bckcontainers1.png');
+  --image-bck-containers: url('../images/bckcontainers.png');
+  --image-bck-containers1: url('../images/bckcontainers1.png');
+
+
+  --image-bck-fundo: url('../images/bckborders.png');
+  --image-bck-containers: url('../images/bckcontainers_green.png');
+  --image-bck-containers1: url('../images/bckcontainers1_green.png');
+
+  font-size: 62.5%;
+}
+
+.wrapper {
+  display: flex;
+  width: 98%;
+  height: 925px;
+  margin: 0 auto;
+  max-width: 1900px;
+}
+
+body {
+  font-family: 'Courier New', Courier, monospace;
+  border-color: var(--border-color);
+}
+
+h1 {
+  font-size: 3.5rem;
+  color: #7bbcfc;
+}
+
+h2 {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode';
+  font-size: 1.5rem;
+  color: #7bbcfc;
+}
+
+ol{
+  width: 100%;
+  margin-left: 30px;
+  padding: 2px;
+}
+
+ol li {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode';
+  font-size: 1.9rem;
+  color: #7bfcac;  
+  margin: 4px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  height: auto;
+  background-image: var(--image-bck-containers);
+}
+
+aside {
+  width: 24%;
+  height: auto;
+  padding: 1px;
+  border-left: 2px solid var(--border-color);
+  background-image: var(--image-bck-containers);
+}
+
+.canvas-display {
+  width: 100%;
+  height: 800px;
+  background-image: url('../images/bckblack.png');
+  border: 1px solid;
+  border-color: var(--border-color);
+}
+
+#mcanvas{
+  width: 1410px;
+  height: 800px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-around;
+  width: 99%;
+  height: 130px;
+  margin: 10px;
+  border-radius: 10px 10px 10px 10px;
+  background-image: url('../images/bckblack.png');
+}
+
+.footer-channel {
+  display: flex;
+  width: 20%;
+  height: auto;
+
+  justify-content: start;
+  align-items: center;
+  padding: 5px;
+  margin-right: 10px;
+  background-image: var(--image-bck-containers);
+  border-right: 2px solid;
+  border-right-color: var(--border-color);
+}
+
+.footer-channel img {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+}
+
+.footer-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 80%;
+  height: auto;
+  margin-left: 10px;
+}
+
+/* aside */
+.container-display {
+  width: 100%;
+  height: 300px;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 10px 10px 0px 0px;
+  border-bottom: 2px solid var(--border-color);
+  background-image: url('../images/bckblack.png');
+}
+
+.container-tools {
+  width: 100%;
+  height: 480px;
+  padding: 5px;
+  border-radius: 10px 10px 0px 0px;
+  border-bottom: 2px solid var(--border-color);
+  background-image: var(--image-bck-containers);
+  margin-bottom: 10px;
+}
+
+.container-socialmedia {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  height: 105px;
+  /* background-image: var(--image-bck-containers1); */
+}
+
+.container-socialmedia img{
+width: 100%;
+height: auto;
+padding: 2px;
+}
+
+.socialmedia-logo {
+  width: 70px;
+  height: 60px;
+  margin: 5px;
+}
+
+.socialmedia-logo img {
+  width: 100%;
+  height: auto;
+}
+
+@media only screen and (max-width: 1200px) {
+    *{
+      padding: 0;
+      margin: 0; 
+      box-sizing: border-box;
+    } 
+
+    .wrapper {
+      display: flex;
+      width: 98%;
+      height: auto;
+      margin: 0 auto;
+      max-width: 1900px;
+    }
+
+  aside{
+    display:none;
+  }
+
+  main{
+    width: 100%;
+    height: auto;
+  }
+
+  #mcanvas{
+    width: 100%;
+    height: inherit;
+    border-bottom: 16px;
+  }
+
+  .canvas-display{
+    width: 100%;
+    height: 300px;
+    border-bottom: 16px;
+  }
+
+  footer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .footer-title{
+    width: 98%;
+    height: auto;
+    text-align: center;
+    order: 0;
+  }
+
+  .footer-title h1{
+    font-size: 2.0rem;
+  }
+
+  .footer-channel{
+    width: 98%;
+    height: auto;
+    order: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

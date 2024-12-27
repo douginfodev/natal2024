@@ -1,0 +1,337 @@
+//Legenda
+      cnv.font = "20px Arial Bold";
+      cnv.fillStyle = this.fillColor;
+      var pontoID = this.id+'('+positionX+','+positionY+')'; 
+      cnv.fillText(pontoID,this.positionX-50,this.positionY+40); 
+  
+      /*Distancia ponto dos eixos em pixels
+      var distx = Math.abs((this.x - originX[0]));
+      var disty = Math.abs((this.y - originY[1]));
+     
+      var sox = 10;
+      var soy = 10;
+  
+      cnv.font = "5px Arial Bold";
+      cnv.fillStyle = "yellow";
+      
+      //Desenha a linha ate o eixo X 
+      while(sox < distx){     
+        if (posx > 0){      
+          cnv.fillText("o",this.x-sox,this.y+2);
+        }else{  
+          cnv.fillText("o",this.x+sox,this.y+2);    
+        }  
+        sox = sox + 10;
+      }; 
+  
+      while(soy < disty){        
+        if (posy > 0){      
+          cnv.fillText("o",this.x,this.y+soy);  
+        }else{  
+          cnv.fillText("o",this.x,this.y-soy);  
+        }    
+        
+        soy = soy + 10;
+      };*/
+
+       function randomBallPosition(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+
+    # Projeto de criação do ambiente de estudos do canal do #Prof. DOM
+
+A PSR-1 (Basic Coding Standard) do PHP estabelece as seguintes recomendações principais para padronizar o código:
+
+Declaração de Arquivos:
+
+Todos os arquivos PHP devem usar apenas a tag <?php ou <?=.
+
+Os arquivos devem usar o UTF-8 sem BOM (Byte Order Mark).
+
+Namespaces e Classes:
+
+PascalCase StudlyCaps (ex.: MyClass).
+
+Os constantes snake_case (ex.: MY_CONSTANT).
+
+Métodos e Funções:
+
+Os métodos e funções camelCase (ex.: getUserName).
+
+Variáveis:
+
+A PSR-1 não especifica um padrão para variáveis, mas recomenda-se usar camelCase ou snake_case de forma consistente.
+
+
+(function () {
+
+    let ctx;  //context
+    let cnv;  //canvas
+    const GRIDESPACCING = 80;
+    var canvasWidth = 0;
+    var canvasHeight = 0;
+    var canvasScreenCenterX = [0, 0];
+    var canvasScreenCenterY = [0, 0];
+    let variables = ["Screen Width: 1920px", "Screen Height: 1080px"];
+    var treePoints;
+    var treeBalls;
+    var collectionPoints = [];
+    var collectionBalls = [];
+
+    let backgroundDraw = new Image();
+    backgroundDraw.src = '../images/barracanvasgreen.png';
+
+    let imageTree = new Image();
+    imageTree.src = '../images/arvore.png';
+
+
+    const canvasBackground = function (background, width, height, positionX, positionY) {
+        this.width = width;
+        this.height = height;
+        this.originX = positionX;
+        this.originY = positionY;
+        this.render = function () {
+            cnv.drawImage(background, this.originX, this.originY, this.width, this.height);
+        };
+    };
+
+    const canvasText = function (positionX, positionY, text, color, stroke) {
+        this.text = text;
+        this.font = "100px Arial Bold";
+        this.color = color;
+        this.originX = positionX;
+        this.originY = positionY;
+        this.render = function () {
+            cnv.font = this.font;
+
+            if (stroke == true) {
+                cnv.strokeStyle = this.color;
+                cnv.strokeText(this.text, this.originX, this.originY);
+            } else {
+                cnv.fillStyle = this.color;
+                cnv.fillText(this.text, this.originX, this.originY);
+            }
+        };
+    };
+
+    
+    let treePoint = [
+        [350, 700],
+        [400, 600],
+        [450, 500],
+        [500, 400],
+        [550, 300],
+        [600, 200],
+        [650, 100]
+    ];
+
+    let ballPosition = [
+        [400, 650],
+        [500, 600],
+        [600, 650],
+        [680, 600],
+        [600, 550],
+        [650, 500],
+        [700, 550],
+        [550, 450],
+        [680, 400],
+        [650, 350],
+        [630, 300],
+        [650, 250],
+        [680, 200]
+    ];
+
+    const gride = new Grid(GRIDESPACCING, 1000, 1900, "#4d4d4d");
+    const canvasBackImage = new canvasBackground(backgroundDraw, 159, 800, 0, 0);
+    const tree3D = new canvasBackground(imageTree, 350, 600, 720, 100);
+    const infoText = new canvasText(250, 180, "FELIZ", "lime", true);
+    const titleText = new canvasText(950, 180, "NATAL", "white", false);
+    var gradient;
+    var gradiendSky;
+    var gradientFloor;
+    var axisCenterX = 0;
+    var axisCenterY = 0;
+
+    window.onload = init();
+
+    function startDisplay() {
+        let list = document.getElementById('list-display');
+
+        for (var lines = 0; lines < variables.length; lines++) {
+            let lineItem = document.createElement('li');
+
+            lineItem.appendChild(document.createTextNode(variables[lines]));
+            list.appendChild(lineItem);
+        }
+    };
+
+   
+    function init() {
+        ctx = document.getElementById('mcanvas');
+
+        if (ctx !== null) {
+            canvasWidth = ctx.clientWidth;
+            canvasHeight = ctx.clientHeight;
+            canvasScreenCenterX = [canvasWidth / 2, canvasHeight / 2];
+            canvasScreenCenterY = [canvasWidth / 2, canvasHeight / 2];
+            cnv = ctx.getContext('2d');
+            start();
+        } else
+            alert('Impossible to load canvas');
+    };
+
+    function start() {
+        backgroundDraw.onload = function () {
+            canvasBackImage.render();
+            tree3D.render();
+            infoText.render();
+            titleText.render();
+            gride.render();
+        };
+
+        startDisplay();
+
+        for (index = 0; index < 6; index++) {
+            treePoints = new Reta(720, 480, 600, 480, 3, 'T1', 10);
+            treePoints.render(720, (900 - 100), treePoint[index][0], treePoint[index][1]);
+            collectionPoints.push(treePoints);
+        }
+
+        for (countBall = 0; countBall < ballPosition.length; countBall++) {
+            if (countBall % 2 == 0)
+                treeBalls = new Ball(ballPosition[countBall][0], ballPosition[countBall][1], 'red', 20);
+            else
+                treeBalls = new Ball(ballPosition[countBall][0], ballPosition[countBall][1], 'yellow', 15);
+
+            treeBalls.render();
+            collectionBalls.push(treeBalls);
+        }
+
+        gradient = cnv.createLinearGradient(720, 100, 1090, 700);
+        gradient.addColorStop("0", "#EFEFEFFF");
+        gradient.addColorStop("0.8", "green");
+        gradient.addColorStop("1", "green");
+
+        gradientSky = cnv.createLinearGradient(720, 0, 720, 800);
+        gradientSky.addColorStop("0.3", "#291E4BFF");
+        gradientSky.addColorStop("1", "aqua");
+
+        gradientFloor = cnv.createLinearGradient(720, 700, 1090, 800);
+        gradientGround = cnv.createRadialGradient(720, 700, 1090, 800, 250, 250);
+        gradientGround.addColorStop("0.3", "#BA861EFF");
+        gradientGround.addColorStop("1", "yellow");
+
+        axisCenterX = new Reta(canvasScreenCenterX[0], 0, canvasScreenCenterX[0], canvasHeight, 5, 'Axis X', 10);
+        axisCenterY = new Reta(canvasScreenCenterY[0], 0, canvasScreenCenterY[0], canvasWidth, 5, 'Axis Y', 10);
+
+        loop();
+    };
+
+    //UPDATE
+    function update() {
+        draw();
+    }
+
+    //DRAW CANVAS
+    function draw() {
+        cnv.fillStyle = "black";
+        cnv.clearRect(0, 0, 1920, 980);
+        gride.render();
+        canvasBackImage.render();
+   
+        for (var point in collectionPoints) {
+            var treeLevels = collectionPoints[point];
+
+            treeLevels.render(720, treePoint[point][1], treePoint[point][0], treePoint[point][1]);
+        }
+
+        cnv.fillStyle = gradientFloor;
+        cnv.fillRect(720, 700, 1090, 700);
+
+        cnv.strokeStyle = "gray";
+        cnv.strokeRect(0, 700, 720, 700);
+
+        cnv.fillStyle = gradientSky;
+        cnv.fillRect(720, 0, 1090, 700);
+
+        cnv.strokeStyle = "aqua";
+        cnv.strokeRect(0, 0, 720, 700);
+
+        cnv.strokeStyle = "lime";
+        cnv.beginPath();
+        cnv.moveTo(720, 700);
+        cnv.lineTo(350, 700);
+        cnv.lineTo(450, 600);
+        cnv.lineTo(400, 600);
+
+        cnv.lineTo(500, 500);
+        cnv.lineTo(450, 500);
+
+        cnv.lineTo(550, 400);
+        cnv.lineTo(500, 400);
+
+        cnv.lineTo(600, 300);
+        cnv.lineTo(550, 300);
+
+        cnv.lineTo(650, 200);
+        cnv.lineTo(600, 200);
+
+        cnv.lineTo(720, 100);
+        cnv.lineTo(720, 700);
+
+        cnv.stroke();
+        cnv.closePath();
+
+        for (var b in collectionBalls) {
+            var lightBalls = collectionBalls[b];
+
+            lightBalls.render();
+        }
+
+        // Right Tree
+        cnv.beginPath();
+        cnv.moveTo(720, 700);
+        cnv.lineTo(1090, 700);
+        cnv.lineTo(990, 600);
+        cnv.lineTo(1040, 600);
+
+        cnv.lineTo(940, 500);
+        cnv.lineTo(990, 500);
+
+        cnv.lineTo(890, 400);
+        cnv.lineTo(940, 400);
+
+        cnv.lineTo(840, 300);
+        cnv.lineTo(890, 300);
+
+        cnv.lineTo(790, 200);
+        cnv.lineTo(840, 200);
+
+        cnv.lineTo(720, 100);
+        cnv.lineTo(720, 700);
+        cnv.fill();
+        cnv.closePath();
+
+        infoText.render();
+        titleText.render();
+
+        cnv.fillStyle = gradient;
+        tree3D.render();
+        cnv.strokeStyle = 'maroon';
+        cnv.strokeRect(650,700,70,100);
+
+        cnv.fillStyle = 'maroon';
+        cnv.fillRect(720,700,70,100);
+    }
+
+    //RECURSIVE / LOOP 
+    function loop() {
+        update();
+        draw();
+        requestAnimationFrame(loop, ctx);
+    }
+
+}());
