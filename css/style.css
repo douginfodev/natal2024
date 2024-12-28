@@ -6,7 +6,8 @@
 }
 
 :root {
-  --border-color: #7bbcfc;
+  --border-color0: #7bbcfc;
+  --border-color:  #7bfcac;
 
   --image-bck-fundo: url('../images/bckcontainers1.png');
   --image-bck-containers: url('../images/bckcontainers.png');
@@ -22,15 +23,18 @@
 
 .wrapper {
   display: flex;
-  width: 98%;
-  height: 925px;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
   margin: 0 auto;
+  min-width: 420px;
   max-width: 1900px;
 }
 
 body {
   font-family: 'Courier New', Courier, monospace;
   border-color: var(--border-color);
+  background-color: #181818;
 }
 
 h1 {
@@ -45,7 +49,7 @@ h2 {
 }
 
 ol{
-  width: 100%;
+  width: 95%;
   margin-left: 30px;
   padding: 2px;
 }
@@ -59,9 +63,8 @@ ol li {
 
 main {
   display: flex;
-  flex-direction: column;
-  width: 75%;
-  height: auto;
+  width: 99%;
+  height: inherit;
   background-image: var(--image-bck-containers);
 }
 
@@ -70,30 +73,30 @@ aside {
   height: auto;
   padding: 1px;
   border-left: 2px solid var(--border-color);
-  background-image: var(--image-bck-containers);
+  background-image: url('../images/bckblack.png');
 }
 
 .canvas-display {
   width: 100%;
-  height: 800px;
+  height: auto;
   background-image: url('../images/bckblack.png');
-  border: 1px solid;
+  border: 2px solid;
   border-color: var(--border-color);
 }
 
 #mcanvas{
-  width: 1410px;
-  height: 800px;
+  width: 100%;
+  height: auto;
 }
 
 footer {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 99%;
-  height: 130px;
-  margin: 10px;
+  height: auto;
   border-radius: 10px 10px 10px 10px;
-  background-image: url('../images/bckblack.png');
+  background-image: url('../images/bckcontainers_green.png');
+  border-top: 2px solid var(--border-color);
 }
 
 .footer-channel {
@@ -121,9 +124,31 @@ footer {
   align-items: center;
   justify-content: center;
 
-  width: 80%;
+  width: 90%;
   height: auto;
-  margin-left: 10px;
+  margin: 8px;
+  border-radius: 20px 20px;
+  background-color: black;
+  background-image: url('../images/bckblack.png');
+
+}
+
+.container-socialmedia {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 27%;
+  height: inherit;
+  border-radius: 20px 20px;
+  margin: 8px;
+  background-color: black;
+  background-image: url('../images/bckblack.png');
+}
+
+.container-socialmedia img{
+width: 90%;
+height: auto;
+padding: 2px;
 }
 
 /* aside */
@@ -139,28 +164,11 @@ footer {
 
 .container-tools {
   width: 100%;
-  height: 480px;
+  height: 500px;
   padding: 5px;
   border-radius: 10px 10px 0px 0px;
-  border-bottom: 2px solid var(--border-color);
-  background-image: var(--image-bck-containers);
+  background-image: url('../images/bckblack.png');
   margin-bottom: 10px;
-}
-
-.container-socialmedia {
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 80%;
-  height: 105px;
-  /* background-image: var(--image-bck-containers1); */
-}
-
-.container-socialmedia img{
-width: 100%;
-height: auto;
-padding: 2px;
 }
 
 .socialmedia-logo {
@@ -183,10 +191,10 @@ padding: 2px;
 
     .wrapper {
       display: flex;
-      width: 98%;
+      width: 100%;
       height: auto;
       margin: 0 auto;
-      max-width: 1900px;
+      background-image: url('../images/bckblack.png');
     }
 
   aside{
@@ -201,12 +209,11 @@ padding: 2px;
   #mcanvas{
     width: 100%;
     height: inherit;
-    border-bottom: 16px;
   }
 
   .canvas-display{
     width: 100%;
-    height: 300px;
+    height: auto;
     border-bottom: 16px;
   }
 
@@ -215,13 +222,17 @@ padding: 2px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
+    background-image: url('../images/bckblack.png');
+    border-bottom: 2px solid var(--border-color);
+    background-image: url('../images/bckblack.png');
   }
 
   .footer-title{
     width: 98%;
-    height: auto;
+    height: 60px;
     text-align: center;
-    order: 0;
+    order: 1;
   }
 
   .footer-title h1{
@@ -231,9 +242,10 @@ padding: 2px;
   .footer-channel{
     width: 98%;
     height: auto;
-    order: 1;
+    order: 2;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
   }
 }
