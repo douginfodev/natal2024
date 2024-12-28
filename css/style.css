@@ -107,7 +107,7 @@ footer {
   justify-content: start;
   align-items: center;
   padding: 5px;
-  margin-right: 10px;
+  margin-right: 5px;
   background-image: var(--image-bck-containers);
   border-right: 2px solid;
   border-right-color: var(--border-color);
@@ -137,6 +137,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 25%;
   height: inherit;
   border-radius: 20px 20px;
   margin: 8px;
@@ -259,7 +260,7 @@ padding: 2px;
   }
   
   .container-socialmedia img{
-  width: 100%;
+  width: 60%;
   height: auto;
   padding: 2px;
   }
